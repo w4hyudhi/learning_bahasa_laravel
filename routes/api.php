@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DistrikController;
 use App\Http\Controllers\Api\ElectorController;
+use App\Http\Controllers\Api\MainController;
 use App\Http\Controllers\PemilihController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 });
 
-Route::post('login', [AuthController::class, 'login']);
+Route::get('spell', [MainController::class, 'spell']);
+
+
 

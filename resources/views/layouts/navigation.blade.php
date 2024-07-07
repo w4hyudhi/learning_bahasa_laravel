@@ -21,6 +21,23 @@
             </li>
 
             <li class="nav-item">
+                <a href="{{ route('spells.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>
+                        {{ __('Mengeja') }}
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('category_video.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-video"></i>
+                    <p>
+                        {{ __('Video') }}
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="{{ route('elector.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-user"></i>
                     <p>

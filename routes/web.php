@@ -22,25 +22,36 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware('auth')->group(function () {
     Route::view('about', 'about')->name('about');
-
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::post('user/store', [\App\Http\Controllers\UserController::class, 'store'])->name('users.store');
     Route::put('user/{user}/update', [\App\Http\Controllers\UserController::class, 'update'])->name('users.update');
     Route::delete('user/{user}/destroy', [\App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
-
-
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-
     Route::resource('distrik', \App\Http\Controllers\DistrikController::class);
     Route::resource('distrik.desa', \App\Http\Controllers\DesaController::class)->shallow();
     Route::resource('desa.tps', \App\Http\Controllers\TpsController::class)->shallow();
     Route::resource('elector', \App\Http\Controllers\ElectorController::class);
-
     Route::get('/getDesaByDistrik/{id}',  [App\Http\Controllers\DesaController::class, 'getDesaByDistrik']);
-
     Route::get('/getTpsByDesa/{id}',  [App\Http\Controllers\DesaController::class, 'getTpsByDesa']);
-
     Route::get('/ExportElector',  [App\Http\Controllers\ExportController::class, 'export_elector'])->name('export.elector');
     Route::put('hasil/{tps}/update', [\App\Http\Controllers\TpsController::class, 'hasil'])->name('hasil.update');
+
+    // Route::get('spells', [\App\Http\Controllers\SpellController::class, 'index'])->name('spells.index');
+    // Route::post('spell/store', [\App\Http\Controllers\SpellController::class, 'store'])->name('spells.store');
+    // Route::put('spell/{spell}/update', [\App\Http\Controllers\SpellController::class, 'update'])->name('spells.update');
+    // Route::delete('spell/{spell}/destroy', [\App\Http\Controllers\SpellController::class, 'destroy'])->name('spells.destroy');
+
+
+    Route::resource('spells', \App\Http\Controllers\SpellController::class);
+    Route::resource('category_video', \App\Http\Controllers\CategoryVideoController::class);
+    Route::resource('category_video.video', \App\Http\Controllers\VideoController::class)->shallow();
+    // Route::get('categories_video', [\App\Http\Controllers\CategoryVideoController::class, 'index'])->name('categories_video.index');
+    // Route::post('category_video/store', [\App\Http\Controllers\CategoryVideoController::class, 'store'])->name('categories_video.store');
+    // Route::put('category_video/{category_video}/update', [\App\Http\Controllers\CategoryVideoController::class, 'update'])->name('categories_video.update');
+
+    // Route::get('videos', [\App\Http\Controllers\VideoController::class, 'index'])->name('videos.index');
+    // Route::post('video/store', [\App\Http\Controllers\VideoController::class, 'store'])->name('videos.store');
+    // Route::put('video/{video}/update', [\App\Http\Controllers\VideoController::class, 'update'])->name('videos.update');
+
 });
