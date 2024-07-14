@@ -15,7 +15,8 @@ class CategoryImageController extends Controller
      */
     public function index()
     {
-        //
+        $category = CategoryImage::all();
+        return view('category_image.index', compact('category'));
     }
 
     /**
@@ -36,7 +37,19 @@ class CategoryImageController extends Controller
      */
     public function store(StoreCategoryImageRequest $request)
     {
-        //
+        if($request->hasFile('image')){
+            $dokumen = $request->file('image');
+            $nama_dokumen = 'FT'.date('Ymdhis').'.'.$request->file('image')->getClientOriginalExtension();
+            $dokumen->move('images/',$nama_dokumen);
+
+        }
+        CategoryImage::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $nama_dokumen
+        ]);
+
+        return redirect()->back()->with('success', 'Kategori Gambar berhasil ditambahkan');
     }
 
     /**
@@ -70,7 +83,28 @@ class CategoryImageController extends Controller
      */
     public function update(UpdateCategoryImageRequest $request, CategoryImage $categoryImage)
     {
-        //
+        if($request->hasFile('image')){
+            $dokumen = $request->file('image');
+            $nama_dokumen = 'FT'.date('Ymdhis').'.'.$request->file('image')->getClientOriginalExtension();
+            $dokumen->move('images/',$nama_dokumen);
+
+            $categoryImage->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'image' => $nama_dokumen
+            ]);
+
+            return redirect()->back()->with('success', 'Kategori Image berhasil diupdate');
+
+
+        }
+
+        $categoryImage->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->back()->with('success', 'Kategori Image berhasil diupdate');
     }
 
     /**
@@ -81,6 +115,7 @@ class CategoryImageController extends Controller
      */
     public function destroy(CategoryImage $categoryImage)
     {
-        //
+        $categoryImage->delete();
+        return redirect()->back()->with('success', 'Kategori Image berhasil dihapus');
     }
 }

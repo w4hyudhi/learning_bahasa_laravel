@@ -36,6 +36,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::get('spell', [MainController::class, 'spell']);
+Route::get('image-category', [MainController::class, 'ImageCategory']);
+Route::get('item-image/{id}', [MainController::class, 'ItemImage']);
+Route::get('video-category', [MainController::class, 'VideoCategory']);
+Route::get('item-video/{id}', [MainController::class, 'ItemVideo']);
 
 
 

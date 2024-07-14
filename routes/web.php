@@ -46,12 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('spells', \App\Http\Controllers\SpellController::class);
     Route::resource('category_video', \App\Http\Controllers\CategoryVideoController::class);
     Route::resource('category_video.video', \App\Http\Controllers\VideoController::class)->shallow();
-    // Route::get('categories_video', [\App\Http\Controllers\CategoryVideoController::class, 'index'])->name('categories_video.index');
-    // Route::post('category_video/store', [\App\Http\Controllers\CategoryVideoController::class, 'store'])->name('categories_video.store');
-    // Route::put('category_video/{category_video}/update', [\App\Http\Controllers\CategoryVideoController::class, 'update'])->name('categories_video.update');
-
-    // Route::get('videos', [\App\Http\Controllers\VideoController::class, 'index'])->name('videos.index');
-    // Route::post('video/store', [\App\Http\Controllers\VideoController::class, 'store'])->name('videos.store');
-    // Route::put('video/{video}/update', [\App\Http\Controllers\VideoController::class, 'update'])->name('videos.update');
+    Route::resource('category_image', \App\Http\Controllers\CategoryImageController::class);
+    Route::resource('category_image.item_image', \App\Http\Controllers\ItemImageController::class)->shallow();
+ 
 
 });

@@ -23,7 +23,7 @@
                         <div class="card-header">
 
                               <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#modal-lg">
-                                <i class="fas fa-plus-circle"></i> Tambah Category
+                                <i class="fas fa-plus-circle"></i> Tambah Materi
                               </button>
 
                             </div>
@@ -32,30 +32,29 @@
                             <div class="table-responsive">
                                 <table class="table">
                                 <thead>
-                                    {{-- 'category_video_id','title', 'url_video' --}}
                                     <tr><th>No</th>
-                                       <th>Judul Video</th>
-                                        <th>Category Video</th>
-                                        <th>Thumbnail</th>
-                                        <th style="width: 200px">Action</th>
+                                        <th>Image</th>
+                                        <th>Nama Meteri</th>
+                                        <th>Deskripsi</th>
+                                        <th style="width: 150px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($categoryVideo->videos as $data)
+                                @foreach($categoryImage->images as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $data->category->name }}</td>
-                                        <td>{{ $data->title }}</td>
-                                        <td><a href="{{ $data->url_video }}" target="_blank"><img src="{{ $data->getYoutubeThumbnail($data->url_video)}}" alt="" width="100"></a></td>
 
+                                        <td><img src="{{$data->image}}" style="max-width: 50px;" class="img-fluid" alt="image"></td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->description }}</td>
                                         <td>
                                             <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modal-lg{{$data->id}}"><i class="fas fa-edit"></i></a>
-                                            <form action="{{ route('video.destroy', $data->id) }}" method="POST" class="d-inline">
+                                            <form action="{{ route('item_image.destroy', $data->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                             </form>
-                                            <a href="{{ route('category_video.video.index', $data->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+
                                         </td>
                                     </tr>
 
@@ -63,45 +62,56 @@
                                         <div class="modal-dialog modal-lg">
                                           <div class="modal-content">
                                             <div class="modal-header">
-                                              <h4 class="modal-title">Edit Video</h4>
+                                              <h4 class="modal-title">Edit Materi</h4>
                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                               </button>
                                             </div>
-                                            <form action="{{ route('video.update',$data->id) }}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{ route('item_image.update',$data->id) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('put')
                                             <div class="modal-body">
 
-
                                                 <div class="form-group">
-                                                    <label>Judul</label>
-                                                    <input type="text" name="title"
-                                                    class="form-control @error('title') is-invalid @enderror"
-                                                    placeholder="{{ __('Judul Video') }}"
-                                                    value="{{ old('title',$data->title) }}"
+                                                    <label>Nama</label>
+                                                    <input type="text" name="name"
+                                                    class="form-control @error('name') is-invalid @enderror"
+                                                    placeholder="{{ __('Nama Materi') }}"
+                                                    value="{{ old('name',$data->name) }}"
                                                     required>
-                                                    @error('title')
+                                                    @error('name')
                                                      <span class="error invalid-feedback">
                                                         {{ $message }}
                                                      </span>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Link Video Youtube</label>
-                                                    <input type="text" name="url_video"
+                                                    <label>Ejaan</label>
+                                                    <input type="text" name="description"
                                                     class="form-control @error('description') is-invalid @enderror"
-                                                    placeholder="{{ __('https://www.youtube.com/watch?v=') }}"
-                                                    value="{{ old('url_video',$data->url_video) }}"
+                                                    placeholder="{{ __('description') }}"
+                                                    value="{{ old('description',$data->description) }}"
                                                     required>
-                                                    @error('url_video')
+                                                    @error('description')
                                                      <span class="error invalid-feedback">
                                                         {{ $message }}
                                                      </span>
                                                     @enderror
                                                 </div>
 
-
+                                                <div class="form-group">
+                                                    <label>Image</label>
+                                                    <input type="file" name="image"
+                                                    class="form-control @error('image') is-invalid @enderror"
+                                                    placeholder="{{ __('image') }}"
+                                                    value="{{ old('image',$data->image) }}"
+                                                    >
+                                                    @error('image')
+                                                     <span class="error invalid-feedback">
+                                                        {{ $message }}
+                                                     </span>
+                                                    @enderror
+                                                </div>
 
 
                                             </div>
@@ -134,40 +144,55 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Tambah Video</h4>
+              <h4 class="modal-title">Tambah Materi</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form action="{{ route('category_video.video.store',$categoryVideo) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('category_image.item_image.store',$categoryImage->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Judul</label>
-                    <input type="text" name="title"
-                    class="form-control @error('title') is-invalid @enderror"
-                    placeholder="{{ __('Judul Video') }}"
-                    value="{{ old('title') }}"
+                    <label>Nama</label>
+                    <input type="text" name="name"
+                    class="form-control @error('name') is-invalid @enderror"
+                    placeholder="{{ __('Nama Materi') }}"
+                    value="{{ old('name') }}"
                     required>
-                    @error('title')
+                    @error('name')
                      <span class="error invalid-feedback">
                         {{ $message }}
                      </span>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Link Video Youtube</label>
-                    <input type="text" name="url_video"
+                    <label>Ejaan</label>
+                    <input type="text" name="description"
                     class="form-control @error('description') is-invalid @enderror"
-                    placeholder="{{ __('https://www.youtube.com/watch?v=') }}"
-                    value="{{ old('url_video') }}"
+                    placeholder="{{ __('description') }}"
+                    value="{{ old('description') }}"
                     required>
-                    @error('url_video')
+                    @error('description')
                      <span class="error invalid-feedback">
                         {{ $message }}
                      </span>
                     @enderror
                 </div>
+
+                <div class="form-group">
+                    <label>Image</label>
+                    <input type="file" name="image"
+                    class="form-control @error('image') is-invalid @enderror"
+                    placeholder="{{ __('image') }}"
+                    value="{{ old('image') }}"
+                    required>
+                    @error('image')
+                     <span class="error invalid-feedback">
+                        {{ $message }}
+                     </span>
+                    @enderror
+                </div>
+
 
 
             </div>

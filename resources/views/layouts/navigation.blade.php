@@ -29,6 +29,14 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('category_image.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-image"></i>
+                    <p>
+                        {{ __('Tebak Gambar') }}
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('category_video.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-video"></i>
                     <p>

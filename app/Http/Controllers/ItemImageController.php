@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ItemImage;
 use App\Http\Requests\StoreItemImageRequest;
 use App\Http\Requests\UpdateItemImageRequest;
+use App\Models\CategoryImage;
 
 class ItemImageController extends Controller
 {
@@ -13,10 +14,12 @@ class ItemImageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CategoryImage $categoryImage)
     {
-        //
+        $categoryImage->load('images');
+        return view('item_image.index', compact('categoryImage'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -34,8 +37,24 @@ class ItemImageController extends Controller
      * @param  \App\Http\Requests\StoreItemImageRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreItemImageRequest $request)
+    public function store(StoreItemImageRequest $request, CategoryImage $categoryImage)
     {
+
+        if($request->hasFile('image')){
+            $dokumen = $request->file('image');
+            $nama_dokumen = 'FT'.date('Ymdhis').'.'.$request->file('image')->getClientOriginalExtension();
+            $dokumen->move('images/',$nama_dokumen);
+
+        }
+        ItemImage::create([
+            'category_image_id' => $categoryImage->id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $nama_dokumen
+        ]);
+        return redirect()->back()->with('success', 'Item berhasil ditambahkan');
+    
+    
         //
     }
 
@@ -70,7 +89,27 @@ class ItemImageController extends Controller
      */
     public function update(UpdateItemImageRequest $request, ItemImage $itemImage)
     {
-        //
+        
+        if($request->hasFile('image')){
+            $dokumen = $request->file('image');
+            $nama_dokumen = 'FT'.date('Ymdhis').'.'.$request->file('image')->getClientOriginalExtension();
+            $dokumen->move('images/',$nama_dokumen);
+
+            
+            $itemImage->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'image' => $nama_dokumen
+            ]);
+            return redirect()->back()->with('success', 'Item berhasil diupdate');
+        }
+
+        $itemImage->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->back()->with('success', 'Item berhasil diupdate');
     }
 
     /**
@@ -81,6 +120,7 @@ class ItemImageController extends Controller
      */
     public function destroy(ItemImage $itemImage)
     {
-        //
+        $itemImage->delete();
+        return redirect()->back()->with('success', 'Item berhasil dihapus');
     }
 }
