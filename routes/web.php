@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('category_video.video', \App\Http\Controllers\VideoController::class)->shallow();
     Route::resource('category_image', \App\Http\Controllers\CategoryImageController::class);
     Route::resource('category_image.item_image', \App\Http\Controllers\ItemImageController::class)->shallow();
- 
+    Route::resource('quiz_categories', \App\Http\Controllers\QuizCategoryController::class);
+
 
 });

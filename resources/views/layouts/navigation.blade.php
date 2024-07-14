@@ -46,13 +46,21 @@
             </li>
 
             <li class="nav-item">
+                <a href="{{ route('quiz_categories.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-question"></i>
+                    <p>
+                        {{ __('Quiz') }}
+                    </p>
+                </a>
+            </li>
+            {{-- <li class="nav-item">
                 <a href="{{ route('elector.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-user"></i>
                     <p>
                         {{ __('Pemilih') }}
                     </p>
                 </a>
-            </li>
+            </li> --}}
 
             {{-- <li class="nav-item">
                 <a href="{{ route('tps.index') }}" class="nav-link">
@@ -63,14 +71,14 @@
                 </a>
             </li> --}}
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ route('distrik.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-map-marked-alt"></i>
                     <p>
                         {{ __('Distrik') }}
                     </p>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="nav-item">
                 <a href="{{ route('users.index') }}" class="nav-link">

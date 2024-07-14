@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('quiz_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('description');
+            $table->string('image');
+            $table->string('level');
             $table->timestamps();
         });
     }
@@ -27,5 +31,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('quiz_categories');
+
     }
 };
