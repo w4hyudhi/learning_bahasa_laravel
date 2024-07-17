@@ -23,7 +23,7 @@ class QuizResponse extends JsonResource
                 $this->option3,
                 $this->option4,
             ],
-            'answer_index' => $this->answer,
+            'answer_index' => (int) $this->answer,
         ];
     }
 }
