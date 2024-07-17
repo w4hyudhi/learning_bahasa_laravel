@@ -16,7 +16,7 @@ class QuizCategoryController extends Controller
      */
     public function index()
     {
-        $category = QuizCategory::all();
+        $category = QuizCategory::orderBy('level', 'asc')->get();
         return view('category_quiz.index', compact('category'));
     }
 

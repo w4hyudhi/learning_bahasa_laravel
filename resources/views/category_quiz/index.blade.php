@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('Materi Mengeja') }}</h1>
+                    <h1 class="m-0">{{ __('Katagori Soal Evaluasi') }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -53,7 +53,7 @@
                                                 @method('DELETE')
                                                 <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                             </form>
-                                            <a href="{{ route('category_image.item_image.index', $data->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ route('quiz_categories.quiz.index', $data->id) }}" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                         </td>
                                     </tr>
 

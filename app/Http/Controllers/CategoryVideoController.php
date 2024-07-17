@@ -113,6 +113,7 @@ class CategoryVideoController extends Controller
      */
     public function destroy(CategoryVideo $categoryVideo)
     {
-        //
+        $categoryVideo->delete();
+        return redirect()->back()->with('success', 'Kategori Video berhasil dihapus');
     }
 }

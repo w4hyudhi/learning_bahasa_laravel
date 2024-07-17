@@ -40,6 +40,8 @@ Route::get('image-category', [MainController::class, 'ImageCategory']);
 Route::get('item-image/{id}', [MainController::class, 'ItemImage']);
 Route::get('video-category', [MainController::class, 'VideoCategory']);
 Route::get('item-video/{id}', [MainController::class, 'ItemVideo']);
+Route::get('quiz-category', [MainController::class, 'QuizCategory']);
+Route::get('quiz-category/{id}', [MainController::class, 'ItemQuiz']);
 
 
 

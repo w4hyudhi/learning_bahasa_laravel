@@ -21,6 +21,4 @@ class ItemImage extends Model
     {
         return config('app.url') .'/images/'. $value;
     }
-
-
 }

@@ -62,7 +62,7 @@
             <img src="{{ asset('images/logo.jpg') }}" alt="AdminLTE Logo"
                  class="brand-image elevation-3"
                  style="opacity: .8">
-            <span class="brand-text font-weight-light">Pendataan Pemilih</span>
+            <span class="brand-text font-weight-light">Belajar Bahasa</span>
         </a>
 
         @include('layouts.navigation')
