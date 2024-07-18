@@ -15,7 +15,7 @@ class ItemImageResponse extends JsonResource
     public function toArray($request)
     {
         return [
-            'category_id' => $this->category_image_id,
+            'category_id' => (int)  $this->category_image_id,
             'item_id' => $this->id,
             'item_name' => $this->name,
             'item_image' => $this->image,
