@@ -17,9 +17,9 @@ class ItemImageController extends Controller
     public function index(CategoryImage $categoryImage)
     {
         $categoryImage->load('images');
-        return view('item_image.index', compact('categoryImage'));
+        return view('item_Image.index', compact('categoryImage'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -53,8 +53,8 @@ class ItemImageController extends Controller
             'image' => $nama_dokumen
         ]);
         return redirect()->back()->with('success', 'Item berhasil ditambahkan');
-    
-    
+
+
         //
     }
 
@@ -89,13 +89,13 @@ class ItemImageController extends Controller
      */
     public function update(UpdateItemImageRequest $request, ItemImage $itemImage)
     {
-        
+
         if($request->hasFile('image')){
             $dokumen = $request->file('image');
             $nama_dokumen = 'FT'.date('Ymdhis').'.'.$request->file('image')->getClientOriginalExtension();
             $dokumen->move('images/',$nama_dokumen);
 
-            
+
             $itemImage->update([
                 'name' => $request->name,
                 'description' => $request->description,
